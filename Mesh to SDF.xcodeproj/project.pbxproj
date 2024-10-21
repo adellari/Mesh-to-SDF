@@ -6,6 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E090FABB2CC5E2A4002E5A53 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		E0EB16AC2CC2DE3500136963 /* Mesh to SDF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mesh to SDF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -29,10 +42,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E090FAA42CC56D80002E5A53 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E0EB16A32CC2DE3500136963 = {
 			isa = PBXGroup;
 			children = (
 				E0EB16AE2CC2DE3500136963 /* Mesh to SDF */,
+				E090FAA42CC56D80002E5A53 /* Frameworks */,
 				E0EB16AD2CC2DE3500136963 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +76,7 @@
 				E0EB16A82CC2DE3500136963 /* Sources */,
 				E0EB16A92CC2DE3500136963 /* Frameworks */,
 				E0EB16AA2CC2DE3500136963 /* Resources */,
+				E090FABB2CC5E2A4002E5A53 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -251,6 +273,12 @@
 				DEVELOPMENT_TEAM = RXJF5NALU5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
+					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
+					"\"/Users/addyi/Documents/GitHub/Physics Solvers/Mesh to SDF/Mesh to SDF/Frameworks\"",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -290,6 +318,12 @@
 				DEVELOPMENT_TEAM = RXJF5NALU5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
+					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
+					"\"/Users/addyi/Documents/GitHub/Physics Solvers/Mesh to SDF/Mesh to SDF/Frameworks\"",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;

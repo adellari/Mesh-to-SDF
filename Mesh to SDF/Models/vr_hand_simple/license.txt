@@ -1,0 +1,11 @@
+Model Information:
+* title:	VR Hand_Material
+* source:	https://sketchfab.com/3d-models/vr-hand-material-7d911372f2c24290b275ca3b321c7abc
+* author:	tinderboxh (https://sketchfab.com/tinderboxh)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "VR Hand_Material" (https://sketchfab.com/3d-models/vr-hand-material-7d911372f2c24290b275ca3b321c7abc) by tinderboxh (https://sketchfab.com/tinderboxh) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
