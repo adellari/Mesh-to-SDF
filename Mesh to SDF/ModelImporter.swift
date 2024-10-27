@@ -23,11 +23,11 @@ class ModelImporter
     
     init(_ name: String, completion: @escaping (Bool) -> Void)
     {
-        var gltfName = "Models/"+name+"/scene"
+        let gltfName = "scene"
         guard let assetURL = Bundle.main.url(forResource: gltfName, withExtension: "gltf")
         else {
-            completion(false)
             print("Failed to find specified gltf file \(gltfName)")
+            completion(false)
             return
         }
         
@@ -37,6 +37,8 @@ class ModelImporter
                 if status == .complete {
                     self.asset = maybeAsset!
                     print("Loaded asset")
+                    self.loadTriangles()
+                    print("Loaded triangles buffer")
                     completion(true)
                     return
                     
@@ -83,7 +85,7 @@ class ModelImporter
             let uint16Data = indices.bufferView!.buffer.data!.withUnsafeBytes { $0.bindMemory(to: UInt16.self)}
             for i in stride(from: 0, to: indices.count * 2, by: MemoryLayout<UInt16>.stride)
             {
-                var index = Int(uint16Data[i])
+                let index = Int(uint16Data[i])
                 ids.append(index)
                 
             }

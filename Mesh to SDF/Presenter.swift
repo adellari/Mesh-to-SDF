@@ -10,20 +10,23 @@ import SwiftUI
 
 
 struct MetalView : NSViewRepresentable {
-    var renderer: Renderer
+    var renderer: Renderer?
+    var sdf : MeshSDF
     
     class Coordinator : NSObject, MTKViewDelegate {
         var parent : MetalView
-        var renderer : Renderer
+        var renderer : Renderer?
+        var sdf : MeshSDF
         var device : MTLDevice
         var commandQueue : MTLCommandQueue
         
-        init(_parent : MetalView, _renderer: Renderer)
+        init(_parent : MetalView, _renderer: Renderer?, _sdf : MeshSDF)
         {
             self.parent = _parent
             self.renderer = _renderer
-            self.device = renderer.device
-            self.commandQueue = renderer.commandQueue
+            self.sdf = _sdf
+            self.device = renderer?.device ?? self.sdf.device
+            self.commandQueue = renderer?.commandQueue ?? sdf.commandQueue
             
         }
         
@@ -46,7 +49,7 @@ struct MetalView : NSViewRepresentable {
     {
         let metalView = MTKView()
         metalView.delegate = context.coordinator
-        metalView.device = renderer.device
+        metalView.device = renderer?.device ?? sdf.device
         metalView.framebufferOnly = false
         metalView.delegate = context.coordinator
         
@@ -60,7 +63,7 @@ struct MetalView : NSViewRepresentable {
     
     func makeCoordinator() -> Coordinator
     {
-        return Coordinator(_parent: self, _renderer: renderer)
+        return Coordinator(_parent: self, _renderer: renderer, _sdf: sdf)
     }
     
 }

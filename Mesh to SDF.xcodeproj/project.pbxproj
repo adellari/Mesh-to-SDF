@@ -23,9 +23,25 @@
 		E0EB16AC2CC2DE3500136963 /* Mesh to SDF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mesh to SDF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		E01ACB4E2CCE02AE004E9D53 /* Exceptions for "Mesh to SDF" folder in "Embed Frameworks" phase from "Mesh to SDF" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			attributesByRelativePath = {
+				Frameworks/GLTFKit2.framework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
+			};
+			buildPhase = E090FABB2CC5E2A4002E5A53 /* Embed Frameworks */;
+			membershipExceptions = (
+				Frameworks/GLTFKit2.framework,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E0EB16AE2CC2DE3500136963 /* Mesh to SDF */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E01ACB4E2CCE02AE004E9D53 /* Exceptions for "Mesh to SDF" folder in "Embed Frameworks" phase from "Mesh to SDF" target */,
+			);
 			path = "Mesh to SDF";
 			sourceTree = "<group>";
 		};
@@ -277,7 +293,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
-					"\"/Users/addyi/Documents/GitHub/Physics Solvers/Mesh to SDF/Mesh to SDF/Frameworks\"",
+					/Users/addyi/Documents/GitHub/Physics,
+					Solvers/Mesh,
+					to,
+					SDF/Mesh,
+					to,
+					SDF/Frameworks,
+					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -322,7 +344,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
-					"\"/Users/addyi/Documents/GitHub/Physics Solvers/Mesh to SDF/Mesh to SDF/Frameworks\"",
+					/Users/addyi/Documents/GitHub/Physics,
+					Solvers/Mesh,
+					to,
+					SDF/Mesh,
+					to,
+					SDF/Frameworks,
+					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
