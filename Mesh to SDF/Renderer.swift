@@ -32,7 +32,7 @@ class MeshSDF
     var sdfTex : MTLTexture
     var commandQueue : MTLCommandQueue
     var triangles : [Triangle]?
-
+    var voxelGroups : MTLSize?
     
     init(_device : MTLDevice, sharedQueue : MTLCommandQueue?) throws
     {
@@ -52,10 +52,10 @@ class MeshSDF
         voxelTex = device.makeTexture(descriptor: volumeDesc)!
         sdfTex = device.makeTexture(descriptor: volumeDesc)!
         
-        loadMesh()
+        LoadMesh()
     }
     
-    func loadMesh()
+    func LoadMesh()
     {
 
         var model : ModelImporter?
@@ -63,12 +63,50 @@ class MeshSDF
             
             if success{
                 self.triangles = model!.triangles!
+                print("loaded \(self.triangles!.count) triangles")
+                let root = sqrt(Double(self.triangles!.count))
+                let groupSize = ceil(root / 16)
+                self.voxelGroups = MTLSize(width: Int(groupSize), height: Int(groupSize), depth: 1)
+                print("voxel groups: \(self.voxelGroups!.width) x \(self.voxelGroups!.height) x \(self.voxelGroups!.depth)")
+                
+                do {
+                    let captureManager = MTLCaptureManager.shared()
+                    let descriptor = MTLCaptureDescriptor()
+                    descriptor.captureObject = self.commandQueue.device
+                    try captureManager.startCapture(with: descriptor)
+                }
+                
+                catch {
+                    print("could not create capture manager \(error)")
+                }
+                
+                self.Voxelize(sharedBuffer: nil);
+                
+                MTLCaptureManager.shared().stopCapture()
             }
             else {
                 fatalError("failed to load model and triangles")
             }
             
         }
+        
+    }
+    
+    func Voxelize(sharedBuffer : MTLCommandBuffer?)
+    {
+        
+        let commandBuffer = sharedBuffer ?? commandQueue.makeCommandBuffer()!
+        let voxelEncoder = commandBuffer.makeComputeCommandEncoder()!
+        let trisBuffer = device.makeBuffer(bytes: self.triangles!, length: self.triangles!.count * MemoryLayout<Triangle>.stride, options: [])
+        
+        voxelEncoder.setComputePipelineState(voxelizer)
+        voxelEncoder.label = "Mesh to Voxels"
+        voxelEncoder.setBuffer(trisBuffer, offset: 0, index: 0)
+        voxelEncoder.setTexture(voxelTex, index: 0)
+        voxelEncoder.dispatchThreadgroups(voxelGroups!, threadsPerThreadgroup: MTLSize(width: 16, height: 16, depth: 1))
+        voxelEncoder.endEncoding()
+        commandBuffer.commit();
+        
         
     }
     
