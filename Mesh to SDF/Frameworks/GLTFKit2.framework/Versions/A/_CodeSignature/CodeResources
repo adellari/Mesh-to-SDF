@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		gyCHl8D3udnAxMmqZkPmsFT/UgU=
+		YZ23KH0fTAZonOp0wNiwKQoDCrM=
 		</data>
 		<key>Resources/PrivacyInfo.xcprivacy</key>
 		<data>
@@ -26,7 +26,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			t607kXbn1rNEnaGOej4hI+mlpDL2In2Ma7u7Mqdbrb4=
+			NbBoLCVes/OSd+Uyrk+aMkRIZcLFj43c4Jb9ckU75Eo=
 			</data>
 		</dict>
 		<key>Headers/GLTFKit2.h</key>
@@ -61,7 +61,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+KYpqsm2vrs0PmfOIDTkXn941c6pZci+ZBgGBcarY7A=
+			8zHDwy4KfejDqgogoqWZH4mC5qXq7Xk/bt10mQYOgpw=
 			</data>
 		</dict>
 		<key>Modules/GLTFKit2.swiftmodule/arm64-apple-macos.abi.json</key>
@@ -75,14 +75,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			F+WfUYNtWGIyMbVlJaeGgWoC/Zs4b+Xf81Yb3sWTiV8=
+			J7yuYMsAwBgPC2Vdkh1l7Z/y6r5mJc8oz7lEwQ388Tk=
 			</data>
 		</dict>
 		<key>Modules/GLTFKit2.swiftmodule/arm64-apple-macos.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			qXj8bH0sDUtNqyWDhLPPwFntfrnDVau3p2Iu3vnd/tQ=
+			Ry0d8LSuqMxCcZA5m0Qn36NGyFqwrq495aoCjxFX13g=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -96,7 +96,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			9j8RiMZ3/8CGW4mp/h/UDXoAmaxSpFQWnWYjYgl8Rf0=
+			oiicp8UpxUUn9ZDoAz3zTWDA2bvCS87yOzSPkZWajDE=
 			</data>
 		</dict>
 		<key>Resources/PrivacyInfo.xcprivacy</key>

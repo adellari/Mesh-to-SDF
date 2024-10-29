@@ -23,8 +23,21 @@
 		E0EB16AC2CC2DE3500136963 /* Mesh to SDF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mesh to SDF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E01ACB7D2CD0881D004E9D53 /* Exceptions for "Mesh to SDF" folder in "Mesh to SDF" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Models/vr_hand_simple/license.txt,
+				Models/vr_hand_simple/textures/Medical_Hand_baseColor.jpeg,
+				Models/vr_hand_simple/textures/Medical_Hand_metallicRoughness.png,
+				Models/vr_hand_simple/textures/Medical_Hand_normal.png,
+			);
+			target = E0EB16AB2CC2DE3500136963 /* Mesh to SDF */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		E01ACB4E2CCE02AE004E9D53 /* Exceptions for "Mesh to SDF" folder in "Embed Frameworks" phase from "Mesh to SDF" target */ = {
+		E07739B12CD097C100ABF198 /* Exceptions for "Mesh to SDF" folder in "Embed Frameworks" phase from "Mesh to SDF" target */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			attributesByRelativePath = {
 				Frameworks/GLTFKit2.framework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
@@ -40,7 +53,8 @@
 		E0EB16AE2CC2DE3500136963 /* Mesh to SDF */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				E01ACB4E2CCE02AE004E9D53 /* Exceptions for "Mesh to SDF" folder in "Embed Frameworks" phase from "Mesh to SDF" target */,
+				E01ACB7D2CD0881D004E9D53 /* Exceptions for "Mesh to SDF" folder in "Mesh to SDF" target */,
+				E07739B12CD097C100ABF198 /* Exceptions for "Mesh to SDF" folder in "Embed Frameworks" phase from "Mesh to SDF" target */,
 			);
 			path = "Mesh to SDF";
 			sourceTree = "<group>";
@@ -300,6 +314,8 @@
 					to,
 					SDF/Frameworks,
 					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
+					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
+					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -350,6 +366,8 @@
 					SDF/Mesh,
 					to,
 					SDF/Frameworks,
+					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
+					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;

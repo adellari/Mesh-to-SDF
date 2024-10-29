@@ -63,6 +63,8 @@ class ModelImporter
         
         print("loading mesh with \(primitive.indices!.count) vertices")
         
+        var minimums = simd_float3(10000, 10000, 10000);
+        var maximums = simd_float3.zero;
         if let _positions = primitive.copyPackedVertexPositions() {
             let posPtr = _positions.withUnsafeBytes { bytes in
                 return UnsafeRawBufferPointer(start: bytes.baseAddress, count: bytes.count)
@@ -76,10 +78,26 @@ class ModelImporter
                 let yp = position[1]
                 let zp = position[2]
                 
+                if (xp) > maximums.x { maximums.x = xp }
+                if (yp) > maximums.y { maximums.y = yp }
+                if (zp) > maximums.z { maximums.z = zp }
+                if (xp) < minimums.x { minimums.x = xp }
+                if (yp) < minimums.y { minimums.y = yp }
+                if (zp) < minimums.z { minimums.z = zp }
+                
                 pos.append(SIMD3<Float>(x: xp, y: yp, z: zp))
             }
         }
         
+        //trying to center the model
+        var offset = -minimums
+        let span = maximums - minimums
+        let fitFactor = min(60 / span.x, 60 / span.y, 60 / span.z)
+        //let fitFactor : Float = 1
+        print("model minimum: \(minimums), maximums: \(maximums), span: \(maximums - minimums), scaleFactor: \(fitFactor)")
+        print("offset to 0: \(offset)")
+        offset += simd_float3(32 - span.x/2, 32 - span.y/2, 32 - span.z/2)
+        print("offset to the center: \(offset)")
         if let indices = primitive.indices {
             
             let uint16Data = indices.bufferView!.buffer.data!.withUnsafeBytes { $0.bindMemory(to: UInt16.self)}
@@ -95,7 +113,7 @@ class ModelImporter
                 let b = ids[i * 3 + 1]
                 let c = ids[i * 3 + 2]
                 
-                let triangle = Triangle(v1: pos[a], v2: pos[b], v3: pos[c])
+                let triangle = Triangle(v1: (pos[a] * fitFactor)  + offset, v2: (pos[b] * fitFactor) + offset, v3: (pos[c] * fitFactor) + offset)
                 tris.append(triangle)
             }
         }

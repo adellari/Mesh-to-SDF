@@ -33,6 +33,7 @@ class MeshSDF
     var commandQueue : MTLCommandQueue
     var triangles : [Triangle]?
     var voxelGroups : MTLSize?
+    var trisCount : Int?
     
     init(_device : MTLDevice, sharedQueue : MTLCommandQueue?) throws
     {
@@ -64,7 +65,8 @@ class MeshSDF
             if success{
                 self.triangles = model!.triangles!
                 print("loaded \(self.triangles!.count) triangles")
-                let root = sqrt(Double(self.triangles!.count))
+                self.trisCount = self.triangles!.count
+                let root = sqrt(Double(self.trisCount!))
                 let groupSize = ceil(root / 16)
                 self.voxelGroups = MTLSize(width: Int(groupSize), height: Int(groupSize), depth: 1)
                 print("voxel groups: \(self.voxelGroups!.width) x \(self.voxelGroups!.height) x \(self.voxelGroups!.depth)")
@@ -101,7 +103,8 @@ class MeshSDF
         
         voxelEncoder.setComputePipelineState(voxelizer)
         voxelEncoder.label = "Mesh to Voxels"
-        voxelEncoder.setBuffer(trisBuffer, offset: 0, index: 0)
+        voxelEncoder.setBuffer(trisBuffer, offset: 0, index: 1)
+        voxelEncoder.setBytes(&self.trisCount!, length: MemoryLayout<Int>.size, index: 0)
         voxelEncoder.setTexture(voxelTex, index: 0)
         voxelEncoder.dispatchThreadgroups(voxelGroups!, threadsPerThreadgroup: MTLSize(width: 16, height: 16, depth: 1))
         voxelEncoder.endEncoding()
