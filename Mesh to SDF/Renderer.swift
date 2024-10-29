@@ -40,13 +40,13 @@ class MeshSDF
         self.device = _device
         let library = try device.makeDefaultLibrary(bundle: .main)
         let voxelFunc = library.makeFunction(name: "MeshToVoxel")!
-        let sdfFunc = library.makeFunction(name: "VoxelToSDF")!
+        let sdfFunc = library.makeFunction(name: "JFAPreprocess")!
         voxelizer = try device.makeComputePipelineState(function: voxelFunc)
         sdfer = try device.makeComputePipelineState(function: sdfFunc)
         self.commandQueue = sharedQueue ?? device.makeCommandQueue()!
         
         let volumeDesc = MTLTextureDescriptor()
-        volumeDesc.pixelFormat = .r16Float
+        volumeDesc.pixelFormat = .rgba16Float
         volumeDesc.textureType = .type3D
         volumeDesc.width = 64; volumeDesc.height = 64; volumeDesc.depth = 64;
         volumeDesc.usage = MTLTextureUsage([.shaderRead, .shaderWrite])

@@ -90,9 +90,9 @@ class ModelImporter
         }
         
         //trying to center the model
-        var offset = -minimums
         let span = maximums - minimums
-        let fitFactor = min(60 / span.x, 60 / span.y, 60 / span.z)
+        let fitFactor = min(64 / span.x, 64 / span.y, 64 / span.z)
+        var offset = -minimums * fitFactor
         //let fitFactor : Float = 1
         print("model minimum: \(minimums), maximums: \(maximums), span: \(maximums - minimums), scaleFactor: \(fitFactor)")
         print("offset to 0: \(offset)")
