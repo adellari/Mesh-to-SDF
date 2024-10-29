@@ -96,7 +96,7 @@ class ModelImporter
         //let fitFactor : Float = 1
         print("model minimum: \(minimums), maximums: \(maximums), span: \(maximums - minimums), scaleFactor: \(fitFactor)")
         print("offset to 0: \(offset)")
-        offset += simd_float3(32 - span.x/2, 32 - span.y/2, 32 - span.z/2)
+        offset += simd_float3(32 - (fitFactor * span.x/2), 32 - (fitFactor * span.y/2), 32 - (fitFactor * span.z/2))
         print("offset to the center: \(offset)")
         if let indices = primitive.indices {
             
@@ -113,7 +113,7 @@ class ModelImporter
                 let b = ids[i * 3 + 1]
                 let c = ids[i * 3 + 2]
                 
-                let triangle = Triangle(v1: (pos[a] * fitFactor)  + offset, v2: (pos[b] * fitFactor) + offset, v3: (pos[c] * fitFactor) + offset)
+                let triangle = Triangle(v1: (pos[a] * fitFactor) + offset, v2: (pos[b] * fitFactor) + offset, v3: (pos[c] * fitFactor) + offset)
                 tris.append(triangle)
             }
         }
