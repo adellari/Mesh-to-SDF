@@ -17,6 +17,15 @@ struct Triangle
 };
 
 
+kernel void JFAPost(texture3d<half, access::read_write> cube [[texture(0)]], const uint3 position [[thread_position_in_grid]])
+{
+    half3 pos = half3(position.x * 1.f, position.y * 1.f, position.z * 1.f) / 64.f;
+    half3 closestCoord = cube.read(position).xyz;
+    
+    half dist = distance(pos, closestCoord);
+    cube.write(half4(dist, dist, dist, 1), position);
+}
+
 kernel void JFAIteration(texture3d<half, access::read_write> cube [[texture(0)]], constant short& iteration [[buffer(0)]], const uint3 position [[thread_position_in_grid]])
 {
     half dist = INFINITY;
@@ -74,3 +83,4 @@ kernel void MeshToVoxel(texture3d<half, access::write> voxelTex [[texture(0)]], 
         }
     }
 }
+

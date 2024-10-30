@@ -27,6 +27,7 @@ class MeshSDF
 {
     var device : MTLDevice
     var voxelizer : MTLComputePipelineState
+    var jfer : MTLComputePipelineState
     var sdfer : MTLComputePipelineState
     var voxelTex : MTLTexture
     var sdfTex : MTLTexture
@@ -40,8 +41,10 @@ class MeshSDF
         self.device = _device
         let library = try device.makeDefaultLibrary(bundle: .main)
         let voxelFunc = library.makeFunction(name: "MeshToVoxel")!
-        let sdfFunc = library.makeFunction(name: "JFAIteration")!
+        let jfaFunc = library.makeFunction(name: "JFAIteration")!
+        let sdfFunc = library.makeFunction(name: "JFAPost")!
         voxelizer = try device.makeComputePipelineState(function: voxelFunc)
+        jfer = try device.makeComputePipelineState(function: jfaFunc)
         sdfer = try device.makeComputePipelineState(function: sdfFunc)
         self.commandQueue = sharedQueue ?? device.makeCommandQueue()!
         
@@ -115,7 +118,7 @@ class MeshSDF
         {
             var iter = Int16(iteration)
             let jfaEncoder = commandBuffer.makeComputeCommandEncoder()!
-            jfaEncoder.setComputePipelineState(sdfer)
+            jfaEncoder.setComputePipelineState(jfer)
             jfaEncoder.setTexture(voxelTex, index: 0)
             jfaEncoder.setBytes(&iter, length:MemoryLayout<Int16>.size, index: 0)
             jfaEncoder.dispatchThreadgroups(MTLSize(width: 8, height: 8, depth: 8), threadsPerThreadgroup: MTLSize(width: 8, height: 8, depth: 8))
@@ -123,6 +126,12 @@ class MeshSDF
             
             iteration /= 2
         }
+        
+        let sdfEncoder = commandBuffer.makeComputeCommandEncoder()!
+        sdfEncoder.setComputePipelineState(sdfer)
+        sdfEncoder.setTexture(voxelTex, index: 0)
+        sdfEncoder.dispatchThreadgroups(MTLSize(width: 8, height: 8, depth: 8), threadsPerThreadgroup: MTLSize(width: 8, height: 8, depth: 8))
+        sdfEncoder.endEncoding()
         
         commandBuffer.commit();
         
