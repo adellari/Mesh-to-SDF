@@ -21,8 +21,8 @@ kernel void JFAIteration(texture3d<half, access::read_write> cube [[texture(0)]]
 {
     half dist = INFINITY;
     const uint3 pos = position;
-    half4 closest = cube.read(pos).xyzw;
-    
+    half4 closest = cube.read(pos);
+    half3 ourPos = half3(pos.x * 1.f, pos.y * 1.f, pos.z * 1.f) / 64.f;
     for (uint i = 0; i < 3; i++)
     {
         for (uint j = 0; j < 3; j++)
@@ -30,12 +30,12 @@ kernel void JFAIteration(texture3d<half, access::read_write> cube [[texture(0)]]
             for (uint k = 0; k < 3; k++)
             {
                 //neighbor position
-                uint3 nPos = uint3(i - 1, j - 1, k - 1) * iteration + pos;
+                int3 nPos = int3(i - 1, j - 1, k - 1) * iteration + int3(pos);
                 if (any(nPos >= 64) || any(nPos < 0)) continue;
-                half4 nPix = cube.read(nPos);
+                half4 nPix = cube.read(uint3(nPos));
                 if (nPix.w == 0) continue;
                 
-                half _dist = distance(nPix.xyz, half3(pos));
+                half _dist = distance(nPix.xyz, ourPos);
                 if (_dist < dist) {
                     closest = nPix;
                     dist = _dist;

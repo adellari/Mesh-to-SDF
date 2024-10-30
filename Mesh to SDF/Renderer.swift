@@ -109,16 +109,19 @@ class MeshSDF
         voxelEncoder.dispatchThreadgroups(voxelGroups!, threadsPerThreadgroup: MTLSize(width: 16, height: 16, depth: 1))
         voxelEncoder.endEncoding()
         
-        for i in 1...4 {
-            
-            var iteration = Int16(i)
+        var iteration = 32
+        
+        while iteration >= 1
+        {
+            var iter = Int16(iteration)
             let jfaEncoder = commandBuffer.makeComputeCommandEncoder()!
             jfaEncoder.setComputePipelineState(sdfer)
             jfaEncoder.setTexture(voxelTex, index: 0)
-            jfaEncoder.setBytes(&iteration, length:MemoryLayout<Int16>.size, index: 0)
+            jfaEncoder.setBytes(&iter, length:MemoryLayout<Int16>.size, index: 0)
             jfaEncoder.dispatchThreadgroups(MTLSize(width: 8, height: 8, depth: 8), threadsPerThreadgroup: MTLSize(width: 8, height: 8, depth: 8))
             jfaEncoder.endEncoding()
             
+            iteration /= 2
         }
         
         commandBuffer.commit();
