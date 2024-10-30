@@ -17,11 +17,11 @@ struct Triangle
 };
 
 
-kernel void JFAIteration(texture3d<half, access::read_write> cube [[texture(0)]], constant int& iteration [[buffer(0)]], const uint3 position [[thread_position_in_grid]])
+kernel void JFAIteration(texture3d<half, access::read_write> cube [[texture(0)]], constant short& iteration [[buffer(0)]], const uint3 position [[thread_position_in_grid]])
 {
     half dist = INFINITY;
     const uint3 pos = position;
-    half4 closest = half4(cube.read(pos).xyzw * 1.f);
+    half4 closest = cube.read(pos).xyzw;
     
     for (uint i = 0; i < 3; i++)
     {
@@ -30,7 +30,7 @@ kernel void JFAIteration(texture3d<half, access::read_write> cube [[texture(0)]]
             for (uint k = 0; k < 3; k++)
             {
                 //neighbor position
-                uint3 nPos = uint3(i - 1, j - 1, k - 1) + pos;
+                uint3 nPos = uint3(i - 1, j - 1, k - 1) * iteration + pos;
                 if (any(nPos >= 64) || any(nPos < 0)) continue;
                 half4 nPix = cube.read(nPos);
                 if (nPix.w == 0) continue;

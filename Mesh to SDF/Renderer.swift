@@ -40,7 +40,7 @@ class MeshSDF
         self.device = _device
         let library = try device.makeDefaultLibrary(bundle: .main)
         let voxelFunc = library.makeFunction(name: "MeshToVoxel")!
-        let sdfFunc = library.makeFunction(name: "JFAPreprocess")!
+        let sdfFunc = library.makeFunction(name: "JFAIteration")!
         voxelizer = try device.makeComputePipelineState(function: voxelFunc)
         sdfer = try device.makeComputePipelineState(function: sdfFunc)
         self.commandQueue = sharedQueue ?? device.makeCommandQueue()!
@@ -98,9 +98,9 @@ class MeshSDF
     {
         
         let commandBuffer = sharedBuffer ?? commandQueue.makeCommandBuffer()!
-        let voxelEncoder = commandBuffer.makeComputeCommandEncoder()!
         let trisBuffer = device.makeBuffer(bytes: self.triangles!, length: self.triangles!.count * MemoryLayout<Triangle>.stride, options: [])
         
+        let voxelEncoder = commandBuffer.makeComputeCommandEncoder()!
         voxelEncoder.setComputePipelineState(voxelizer)
         voxelEncoder.label = "Mesh to Voxels"
         voxelEncoder.setBuffer(trisBuffer, offset: 0, index: 1)
@@ -108,6 +108,19 @@ class MeshSDF
         voxelEncoder.setTexture(voxelTex, index: 0)
         voxelEncoder.dispatchThreadgroups(voxelGroups!, threadsPerThreadgroup: MTLSize(width: 16, height: 16, depth: 1))
         voxelEncoder.endEncoding()
+        
+        for i in 1...4 {
+            
+            var iteration = Int16(i)
+            let jfaEncoder = commandBuffer.makeComputeCommandEncoder()!
+            jfaEncoder.setComputePipelineState(sdfer)
+            jfaEncoder.setTexture(voxelTex, index: 0)
+            jfaEncoder.setBytes(&iteration, length:MemoryLayout<Int16>.size, index: 0)
+            jfaEncoder.dispatchThreadgroups(MTLSize(width: 8, height: 8, depth: 8), threadsPerThreadgroup: MTLSize(width: 8, height: 8, depth: 8))
+            jfaEncoder.endEncoding()
+            
+        }
+        
         commandBuffer.commit();
         
         
