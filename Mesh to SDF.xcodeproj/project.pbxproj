@@ -316,6 +316,7 @@
 					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
+					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -366,6 +367,7 @@
 					SDF/Mesh,
 					to,
 					SDF/Frameworks,
+					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",
 					"$(PROJECT_DIR)/Mesh\\ to\\ SDF/Frameworks",

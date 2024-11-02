@@ -17,9 +17,14 @@ class Renderer
     {
         self.device = _device
         let library = try device.makeDefaultLibrary(bundle: .main)
-        let tracerFunc = library.makeFunction(name: "Tracer")!
+        let tracerFunc = library.makeFunction(name: "Renderer")!
         tracer = try device.makeComputePipelineState(function: tracerFunc)
         commandQueue = device.makeCommandQueue()!
+    }
+    
+    func Draw(chain : inout MTLDrawable)
+    {
+        var Tex = chain
     }
 }
 
